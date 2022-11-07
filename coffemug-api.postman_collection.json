@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "9f28e5d9-0434-47eb-bd48-3d1188f005d6",
+		"name": "coffemug-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18527749"
+	},
+	"item": [
+		{
+			"name": "API status check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response body gives value of OK\", function() {\r",
+							"    const res = pm.response.json();\r",
+							"    res.status.to.be = \"OK\"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/status",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Request returns array\", function() {\r",
+							"    const res = pm.response.json();\r",
+							"    res.to.be = Array\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/products/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST new product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);  \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Product has been added to DB\", function() {\r",
+							"    pm.response.to.be.json;\r",
+							"    const res = pm.response.json();\r",
+							"    if(res._id !== undefined) {\r",
+							"        pm.collectionVariables.set(\"prod_id\", res._id)\r",
+							"    }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomProductName}}\",\r\n    \"price\": \"{{$randomPrice}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/products/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET single product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Requested product ID is correct\", function() {\r",
+							"    const res = pm.response.json();\r",
+							"    if(res._id !== undefined) {\r",
+							"        res._id.to.be = pm.collectionVariables.get(\"prod_id\")\r",
+							"    }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/products/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{prod_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Requested is updated and has the same ID\", function() {\r",
+							"    const res = pm.response.json();\r",
+							"    if(res._id !== undefined) {\r",
+							"        res._id.to.be = pm.collectionVariables.get(\"prod_id\")\r",
+							"    }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomProductName}}\",\r\n    \"price\": \"{{$randomPrice}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/products/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{prod_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Requested product has been deleted\", function() {\r",
+							"    pm.response.to.have.status(200);  \r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/products/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{prod_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "prod_id",
+			"value": ""
+		}
+	]
+}
