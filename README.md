@@ -2,9 +2,9 @@
 
 ## Technologies
 Project is created with:
-* Node.js
-* Typescript
-* MongoDB
+* [Node.js](https://nodejs.org/en/)
+* [Typescript](https://www.typescriptlang.org/)
+* [MongoDB](https://www.mongodb.com/)
 
 ## Setup
 To run this project, install it locally using npm:
