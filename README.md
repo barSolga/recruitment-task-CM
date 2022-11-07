@@ -23,7 +23,7 @@ Import the collection from a file into [POSTMAN](https://www.postman.com/) appli
 ## Project requirements:
 1.  Create an API in Node.js using any framework from
     using Typescript language.
-    
+
 2.  Project requirements:
     a. Handle routes/methods:
         • Products list
@@ -31,20 +31,23 @@ Import the collection from a file into [POSTMAN](https://www.postman.com/) appli
         • Create product
         • Update product
         • Delete product
-    b.  Each method should correspond with the specified HTTP query type(GET, POST, PUT, DELETE).
-    c.  Products should be stored in a database (free to choose) or file (any format)
+    b.  Each method should correspond with the specified HTTP query type(GET, POST, PUT, DELETE).<br><br>
+    c.  Products should be stored in a database (free to choose) or file (any format)<br><br>
     d.  Application should be separated into layers - design pattern is free to choose
-        (controller/router should only serve as a data flow controller)
+        (controller/router should only serve as a data flow controller)<br><br>
     e.  Product entity should consist of:
+            ```
             • Id
             • Name
             • Price
             • UpdateDate
+            ```
+            <br><br>
     f.  The input data in the app should be validated
         (name and price are required for a new product, in the case of
-        updating it ID is a requirement, and the maximum length of a name is 100 characters)
+        updating it ID is a requirement, and the maximum length of a name is 100 characters)<br><br>
     g.  Additionally, all services and possible repositories can be injected with
-        IOC container via DI - optional task.
+        IOC container via DI - optional task.<br><br>
 
 3.  The code should be hosted on the GitHub platform.
 
